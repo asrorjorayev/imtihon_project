@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="blog_section layout_padding">
+    <div class="container">
+       <h1 class="news_taital">{{ kitoblar.name}}</h1>
+       <p class="news_text">{{ kitob.aftor }}</p>
+       <p class="news_text">{{ kitob.comment_text }}</p>
+       <div class="blog_section_2">
+          <div class="row">
+             <div class="col-md-10">
+                <img style="height: 800px; width: 100%;" src="{{ kitob.image.url }}" alt="">
+                <p>
+                  {% for izoh in kitob.izohlar.all %}
+               <img src="{{ izoh.user.image.url }}" alt="User photo" style="height: 40px; width: 40px; border-radius: 50%;">             
+               <strong>{{ izoh.user.username }}</strong>   <small class="align-middle">{{ izoh.comment_text }}</small>
+               {% endfor %}
+               </p>
+               <p>
+                  <form action="{% url 'kitoblar:add_comment' kitob.id %}" method="post">
+                     {% csrf_token %}
+                     {{ form.as_p }}
+                     <button type="submit" class="btn btn-primary">Saqlash</button>
+                  </form>
+               </p>
+                <p>{{ kitob.matn }}</p>
+             </div>
+          </div>
+       </div>  
+    </div>
+ </div>
+
+{% endblock %}

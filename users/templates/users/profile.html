@@ -1,0 +1,90 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<title>Profile Sahifasi</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+
+    .card {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: beige;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .image {
+        text-align: center;
+    }
+
+    .image img {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+    }
+
+    .name, .idd {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .follow {
+        font-weight: bold;
+    }
+
+    .btn-outline-success {
+        display: block;
+        margin-top: 20px;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #28a745;
+        border-radius: 5px;
+        background-color: transparent;
+        color: #28a745;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-success:hover {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+    .date {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .join {
+        font-style: italic;
+    }
+</style>
+
+<h1>Profile view page</h1>
+<div class="card">
+    <div class="image">
+        {% if user.image %}
+        <img src="{{ user.image.url }}" alt="Profile Image">
+    
+        {% endif %}
+    </div>
+    <span class="name">{{ user.username }}</span>
+    <span class="idd">{{ user.email }}</span>
+    <div class="follow">{{ user.phone_number }}</div>
+    <a href="{% url 'users:update' %}" class="btn btn-outline-success">Edit Profile</a>
+    <div class="date">Joined {{ user.date_joined|date:"M d, Y" }}</div>
+</div>
+{% endblock %}

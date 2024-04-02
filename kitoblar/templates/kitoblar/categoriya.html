@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for kitob in kitoblar %}
+    <div class="blog_section layout_padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div style="width: 100%;" class="media mb-3">
+                      <img style="height: 600px; width: 600px;" src="{{ kitob.image.url }}" alt="{{ kitob.name }}">
+                      <div class="media-body ml-3">
+                        <h1 class="card-title">{{ kitob.aftor }} </h1> <h2>{{ kitob.name }}</h2>
+                        <div class="text-muted small">{{ kitob.kitob_beti }} varoq</div>
+                        <p class="card-text">
+                           {{ kitob.matn|truncatewords:80 }}
+                         </p>
+                      </div>
+                    </div>
+                   
+                    <a href="javascript:void(0)" class="ui-rect ui-bg-cover" style="background-image: url('https://bootdey.com/img/Content/avatar/avatar3.png');"></a>
+                  </div>
+                  <div class="card-footer">
+                    <a href="javascript:void(0)" class="d-inline-block text-muted">
+                      <strong> </strong> <small class="align-middle">Likes</small>
+                    </a>
+                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                      {% for izoh in kitob.izohlar.all %}
+                        <img src="{{ izoh.user.image.url }}" alt="User photo" style="height: 40px; width: 40px; border-radius: 50%;">             
+                        <strong>{{ izoh.user.username }}</strong><small class="align-middle">{{ izoh.comment_text }}</small>
+                      {% endfor %}
+                    </a>
+                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="read_bt"><a href="{% url 'kitoblar:detail_page' kitob.id %}">Read More</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
